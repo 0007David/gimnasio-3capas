@@ -36,9 +36,10 @@ public class Ncliente {
         DatoCliente.insertCliente();
     }
 
-    public void setClienteM(String ci, String nombre, String telefono, String correo, float peso) throws Exception {
+    public void setClienteM(String ci, String nombre,char sexo, String telefono, String correo, float peso) throws Exception {
         DatoCliente.setCi(ci);
         DatoCliente.setNombre(nombre);
+        DatoCliente.setSexo(sexo);
         DatoCliente.setTelefono(telefono);
         DatoCliente.setCorreo(correo);
         DatoCliente.setPeso(peso);

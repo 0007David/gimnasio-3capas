@@ -52,6 +52,7 @@ public class Ninscripcion {
             //System.out.println("Registrar: "+ detalleInsc);
             detalleInsc.insertDetalleInscripcion();
         }
+        this.vaciarDetalleInscripcion();
     }
 
     public void addDetalleInscripcion(int idDisciplina, String fechaInicio, String fechaFin, float monto) {
@@ -70,6 +71,7 @@ public class Ninscripcion {
             detalle.setIdBoletaInscripcion(this.DatoInscripcion.getId());
             detalle.deleteDetalleInscrion();
         }
+        this.vaciarDetalleInscripcion();
         
     }
 

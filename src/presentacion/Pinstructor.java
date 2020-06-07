@@ -239,7 +239,6 @@ public final class Pinstructor extends javax.swing.JFrame {
         // TODO add your handling code here:
         try {
             if (jtextCi.isEditable()) {
-                System.out.println("Insertamos");
                 String jcboxSexo = jcbxSexo.getSelectedItem().toString();
                 nInstructor.setInstructorR(
                         jtextCi.getText().trim(),
@@ -248,9 +247,9 @@ public final class Pinstructor extends javax.swing.JFrame {
                         Integer.parseInt(jtextTelefono.getText().trim()),
                         jtextProfesion.getText().trim()
                 );
-                System.out.println("exito");
-                getInstructores();
+                System.out.println("Registrado");
             }
+            getInstructores();
         } catch (Exception ex) {
             System.out.println("Error al guardar: " + ex.toString());
             Logger.getLogger(Pcliente.class.getName()).log(Level.SEVERE, null, ex);
@@ -269,20 +268,17 @@ public final class Pinstructor extends javax.swing.JFrame {
             jtextCi.setEditable(false);
             jtextNombre.setText(datos.get("nombre"));
             jcbxSexo.setSelectedIndex((datos.get("sexo").equals("m")) ? 0 : (datos.get("sexo").equals("f")) ? 1 : 2);
-//            jcbxSexo.setEnabled(false);
             jtextProfesion.setText(datos.get("profesion"));
             jtextTelefono.setText(datos.get("telefono"));
         }
-        System.out.println(datos.toString());
+        System.out.println("cargo datos");
     }//GEN-LAST:event_jTableInstructoresMouseClicked
 
     private void jbtnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnModificarActionPerformed
         // TODO add your handling code here:
-        
         try {
             if (!jtextCi.isEditable()) {
                 String jcboxSexo = jcbxSexo.getSelectedItem().toString();
-                System.out.println("Modificamos "+jcboxSexo);
                 nInstructor.setInstructorM(
                         jtextCi.getText().trim(),
                         jtextNombre.getText().trim(),
@@ -290,13 +286,14 @@ public final class Pinstructor extends javax.swing.JFrame {
                         Integer.parseInt(jtextTelefono.getText().trim()),
                         jtextProfesion.getText().trim()
                 );
-                getInstructores();
+                System.out.println("Modificado");
             }
+            getInstructores();
         } catch (Exception ex) {
             Logger.getLogger(Pcliente.class.getName()).log(Level.SEVERE, null, ex);
         }
-        jtextCi.setEditable(true);
-        jcbxSexo.setEnabled(true);
+        
+        
     }//GEN-LAST:event_jbtnModificarActionPerformed
 
     private void jbtnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnEliminarActionPerformed
@@ -308,54 +305,60 @@ public final class Pinstructor extends javax.swing.JFrame {
                     JOptionPane.YES_NO_OPTION);
             if (selectedOption == JOptionPane.YES_OPTION) {
                 try {
-                    //                window.dispose();
                     nInstructor.setInstructorE(jtextCi.getText().trim());
-                    getInstructores();
+                    
                 } catch (Exception ex) {
                     Logger.getLogger(Pcliente.class.getName()).log(Level.SEVERE, null, ex);
                 }
-                System.out.println("Lo eliminimaste");
+                System.out.println("Eliminado");
             }
+            getInstructores();
         }
     }//GEN-LAST:event_jbtnEliminarActionPerformed
 
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Pinstructor.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Pinstructor.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Pinstructor.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Pinstructor.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new Pinstructor().setVisible(true);
-            }
-        });
-    }
+//    public static void main(String args[]) {
+//        /* Set the Nimbus look and feel */
+//        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+//        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+//         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+//         */
+//        try {
+//            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+//                if ("Nimbus".equals(info.getName())) {
+//                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+//                    break;
+//                }
+//            }
+//        } catch (ClassNotFoundException ex) {
+//            java.util.logging.Logger.getLogger(Pinstructor.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (InstantiationException ex) {
+//            java.util.logging.Logger.getLogger(Pinstructor.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (IllegalAccessException ex) {
+//            java.util.logging.Logger.getLogger(Pinstructor.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+//            java.util.logging.Logger.getLogger(Pinstructor.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        }
+//        //</editor-fold>
+//
+//        /* Create and display the form */
+//        java.awt.EventQueue.invokeLater(new Runnable() {
+//            public void run() {
+//                new Pinstructor().setVisible(true);
+//            }
+//        });
+//    }
     public void getInstructores(){
         DefaultTableModel listar = nInstructor.getTablaInstructores();
         jTableInstructores.setModel(listar);
+        this.jtextCi.setText("");
+        this.jtextNombre.setText("");
+        this.jtextProfesion.setText("");
+        this.jtextTelefono.setText("");
+        this.jcbxSexo.setSelectedItem(0);
+        this.jtextCi.setEditable(true);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

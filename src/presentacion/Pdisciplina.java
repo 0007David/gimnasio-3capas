@@ -37,7 +37,7 @@ public class Pdisciplina extends javax.swing.JFrame {
         this.getDisciplinas();
         this.getInstructores();
         this.getSalas();
-        hideShowId(false);
+        
 
     }
 
@@ -326,14 +326,13 @@ public class Pdisciplina extends javax.swing.JFrame {
                 }
                 //insertar Horario
                 this.nDisciplina.setHorariosR();
-                this.getDisciplinas();
+                System.out.println("Registrado");
             } catch (Exception ex) {
                 Logger.getLogger(Pdisciplina.class.getName()).log(Level.SEVERE, null, ex);
             }
 
-        } else {
-            System.out.println("No lo guardo");
         }
+        this.getDisciplinas();
 
     }//GEN-LAST:event_jbtnRegistrarActionPerformed
 
@@ -345,7 +344,7 @@ public class Pdisciplina extends javax.swing.JFrame {
 
         Map<String, String> datos = nDisciplina.getDisciplina(Integer.parseInt(id.trim()));
         if (!datos.containsKey("estado")) {
-            limpiar();
+            this.limpiar();
             //Seleccionar el instructor y la sala selectas
             Map<String, String> instructor = nInstructor.getInstructor(datos.get("id_instructor"), 1);
             Map<String, String> sala = nSala.getSala(Integer.parseInt(datos.get("id_sala")));
@@ -356,6 +355,7 @@ public class Pdisciplina extends javax.swing.JFrame {
             jtextDescripcion.setText(datos.get("descripcion"));
             //Trae los horarios de la disciplina
             this.cargarHorarios(Integer.parseInt(datos.get("id")));
+            System.out.println("Cargo datos");
         }
 
 
@@ -386,10 +386,7 @@ public class Pdisciplina extends javax.swing.JFrame {
                     this.nDisciplina.addHorarioDisciplina(horario);
                 }
                 this.nDisciplina.setHorariosR();
-                
-            } else {
-
-                System.out.println("No se modifico");
+                System.out.println("Modificado");
             }
             this.getDisciplinas();
         } catch (Exception ex) {
@@ -413,50 +410,50 @@ public class Pdisciplina extends javax.swing.JFrame {
                     nDisciplina.setHorariosE();
                     //elimininamos la disciplina
                     nDisciplina.setDisciplinaE(idDisciplina);
-                    
-                    this.getDisciplinas();
+                    System.out.println("Eliminado");
                 } catch (Exception ex) {
                     Logger.getLogger(Pcliente.class.getName()).log(Level.SEVERE, null, ex);
                 }
-                System.out.println("Lo eliminimaste");
+                
             }
+            this.getDisciplinas();
         }
     }//GEN-LAST:event_jbtnEliminarActionPerformed
 
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Pdisciplina.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Pdisciplina.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Pdisciplina.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Pdisciplina.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new Pdisciplina().setVisible(true);
-            }
-        });
-    }
+//    public static void main(String args[]) {
+//        /* Set the Nimbus look and feel */
+//        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+//        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+//         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+//         */
+//        try {
+//            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+//                if ("Nimbus".equals(info.getName())) {
+//                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+//                    break;
+//                }
+//            }
+//        } catch (ClassNotFoundException ex) {
+//            java.util.logging.Logger.getLogger(Pdisciplina.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (InstantiationException ex) {
+//            java.util.logging.Logger.getLogger(Pdisciplina.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (IllegalAccessException ex) {
+//            java.util.logging.Logger.getLogger(Pdisciplina.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+//            java.util.logging.Logger.getLogger(Pdisciplina.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        }
+//        //</editor-fold>
+//
+//        /* Create and display the form */
+//        java.awt.EventQueue.invokeLater(new Runnable() {
+//            public void run() {
+//                new Pdisciplina().setVisible(true);
+//            }
+//        });
+//    }
 
     private ArrayList<String> horariosChecked() {
         ArrayList<String> horario = new ArrayList<>();

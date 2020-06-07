@@ -200,6 +200,7 @@
     </Component>
     <Component class="javax.swing.JTextField" name="jtextId">
       <Properties>
+        <Property name="editable" type="boolean" value="false"/>
         <Property name="text" type="java.lang.String" value="id"/>
       </Properties>
     </Component>

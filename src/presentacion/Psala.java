@@ -28,7 +28,6 @@ public final class Psala extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
         nSala = new Nsala();
         this.getSalas();
-        hideShowId(false);
     }
 
     /**
@@ -123,6 +122,7 @@ public final class Psala extends javax.swing.JFrame {
 
         jlbId.setText("ID");
 
+        jtextId.setEditable(false);
         jtextId.setText("id");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -207,15 +207,14 @@ public final class Psala extends javax.swing.JFrame {
         // TODO add your handling code here:
         try {
             if (!jtextId.isVisible()) {
-                System.out.println("Insertamos");
-                
                 nSala.setSalaR(
                         jtextNombre.getText().trim(),
                         Integer.parseInt(jtextCapacidad.getText().trim())
                 );
-                System.out.println("exito");
-                getSalas();
+                System.out.println("Registrado");
             }
+            getSalas();
+            
         } catch (Exception ex) {
             System.out.println("Error al guardar: " + ex.toString());
             Logger.getLogger(Pcliente.class.getName()).log(Level.SEVERE, null, ex);
@@ -229,14 +228,13 @@ public final class Psala extends javax.swing.JFrame {
 //        int column = source.columnAtPoint(evt.getPoint());
         String id = source.getModel().getValueAt(row, 0) + "";
         Map<String, String> datos = nSala.getSala(Integer.parseInt(id.trim()));
-        this.hideShowId(true);
         if (!datos.containsKey("estado")) {
             jtextId.setText(datos.get("id"));
-            jtextId.setEditable(false);
             jtextNombre.setText(datos.get("nombre"));
             jtextCapacidad.setText(datos.get("capacidad"));
+            this.hideShowId(true);
         }
-        System.out.println(datos.toString());
+        System.out.println("Cargo datos");
     }//GEN-LAST:event_jTableSalaMouseClicked
 
     private void jbtnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnModificarActionPerformed
@@ -248,10 +246,9 @@ public final class Psala extends javax.swing.JFrame {
                         jtextNombre.getText().trim(),
                         Integer.parseInt(jtextCapacidad.getText().trim())
                 );
-                System.out.println("Modificamos");
-                getSalas();
-                hideShowId(false);
+                System.out.println("Modificado");
             }
+            getSalas();
         } catch (Exception ex) {
             Logger.getLogger(Pcliente.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -261,60 +258,62 @@ public final class Psala extends javax.swing.JFrame {
         // TODO add your handling code here:
         if (jtextId.isVisible()) {
             int selectedOption = JOptionPane.showConfirmDialog(null,
-                    "Esta Seguro de Elimanar la sala?",
+                    "Esta Seguro de Elimanar la sala"+this.jtextNombre.getText()+"?",
                     "Eligue",
                     JOptionPane.YES_NO_OPTION);
             if (selectedOption == JOptionPane.YES_OPTION) {
                 try {
                     nSala.setSalaE(Integer.parseInt(jtextId.getText().trim()));
-                    System.out.println("Lo eliminimaste");
-                    getSalas();
-                    hideShowId(false);
+                    System.out.println("Eliminado");
                 } catch (Exception ex) {
                     Logger.getLogger(Pcliente.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
+            getSalas();
         }
     }//GEN-LAST:event_jbtnEliminarActionPerformed
 
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Psala.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Psala.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Psala.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Psala.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new Psala().setVisible(true);
-            }
-        });
-    }
+//    public static void main(String args[]) {
+//        /* Set the Nimbus look and feel */
+//        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+//        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+//         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+//         */
+//        try {
+//            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+//                if ("Nimbus".equals(info.getName())) {
+//                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+//                    break;
+//                }
+//            }
+//        } catch (ClassNotFoundException ex) {
+//            java.util.logging.Logger.getLogger(Psala.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (InstantiationException ex) {
+//            java.util.logging.Logger.getLogger(Psala.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (IllegalAccessException ex) {
+//            java.util.logging.Logger.getLogger(Psala.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+//            java.util.logging.Logger.getLogger(Psala.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        }
+//        //</editor-fold>
+//
+//        /* Create and display the form */
+//        java.awt.EventQueue.invokeLater(new Runnable() {
+//            public void run() {
+//                new Psala().setVisible(true);
+//            }
+//        });
+//    }
     
     public void getSalas(){
         DefaultTableModel listar = nSala .getTablaSalas();
         jTableSala.setModel(listar);
+        this.jtextNombre.setText("");
+        this.jtextCapacidad.setText("");
+        this.hideShowId(false);
     }
     
     private void hideShowId(boolean bandera){

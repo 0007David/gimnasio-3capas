@@ -57,7 +57,7 @@ public class Dsala {
     public DefaultTableModel getTabla() {
         String[] columnNames = {"Nro", "Nombre", "Capacidad"};
         DefaultTableModel listar = new DefaultTableModel(columnNames, 0);
-        String query = "SELECT * FROM sala";
+        String query = "SELECT * FROM sala ORDER BY id";
         //-----------------------------
         Statement Consulta;
         ResultSet resultado = null;

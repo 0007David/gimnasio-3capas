@@ -53,7 +53,7 @@ public class Ndisciplina {
 
     public void setHorariosE() throws Exception {
         Dhorario horario = new Dhorario();
-        horario.setId(getId());
+        horario.setId_disciplina(this.getId());
         horario.deleteHorario();
     }
 

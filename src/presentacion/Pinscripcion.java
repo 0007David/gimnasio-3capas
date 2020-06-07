@@ -317,7 +317,6 @@ public class Pinscripcion extends javax.swing.JFrame {
     private void jbtnQuitarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnQuitarActionPerformed
         // TODO add your handling code here:
         quitarDisciplinaInscripcion();
-
     }//GEN-LAST:event_jbtnQuitarActionPerformed
 
 
@@ -338,7 +337,6 @@ public class Pinscripcion extends javax.swing.JFrame {
 
                 //System.out.println("MaxId:" + this.nInscripcion.getMaxId());
                 //Datos del Detalle de Inscripcion
-
                 int count = jTableDetalleInscripcion.getRowCount();
                 // System.out.println("idClient" + ciCliente + " Fecha: " + fecha + " Monto: " + montoTotal + " Couunt: " + count);
                 for (int i = 0; i < count; i++) {
@@ -352,12 +350,12 @@ public class Pinscripcion extends javax.swing.JFrame {
                 this.nInscripcion.setId(nInscripcion.getMaxId());
                 nInscripcion.setDetalleInscripcionR(); //inserta el detalle
                 nInscripcion.vaciarDetalleInscripcion();
-                this.limpiar();
-                this.getInscripciones();
+
                 System.out.println("Registrado");
-            } else {
-                System.out.println("no se inserto porq idBoleta: " + jtextId.getText());
             }
+            this.limpiar();
+            this.getInscripciones();
+            this.nInscripcion.vaciarDetalleInscripcion();
         } catch (Exception ex) {
             Logger.getLogger(Pinscripcion.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -369,7 +367,7 @@ public class Pinscripcion extends javax.swing.JFrame {
         float total = 0;
         for (int i = 0; i < count; i++) {
             String dato = jTableDetalleInscripcion.getValueAt(i, 4).toString().trim();
-            
+
             if (!"".equals(dato)) {
                 float monto = Float.parseFloat(dato);
                 total += monto;
@@ -377,6 +375,7 @@ public class Pinscripcion extends javax.swing.JFrame {
         }
         jtextMontoTotal.setText(String.valueOf(total));
         jlbMontoTotal.setText("Monto Total " + total + " BS");
+
     }//GEN-LAST:event_jTableDetalleInscripcionMouseExited
 
     private void jTableInscripcionesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableInscripcionesMouseClicked
@@ -388,6 +387,7 @@ public class Pinscripcion extends javax.swing.JFrame {
         ArrayList<Map> datos = nInscripcion.getDetalleInscripcion();
 
         this.mostrarDetalleInscripcion(datos);
+        System.out.println("Cargo datos");
 
     }//GEN-LAST:event_jTableInscripcionesMouseClicked
 
@@ -400,18 +400,18 @@ public class Pinscripcion extends javax.swing.JFrame {
                 int id = Integer.parseInt(jtextId.getText().trim());
                 float monto = Float.parseFloat(jtextMontoTotal.getText().trim());
                 String fecha = jtextFecha.getText().trim();
-                
+
                 //Agregamos los nuevos valores
                 this.nInscripcion.setInscripcionM(
                         id,
                         fecha,
                         monto);
-                 
+
                 //Eliminar los detalle de la inscripcion
                 nInscripcion.setId(id);
                 nInscripcion.setDetalleInscripcionE();
-                nInscripcion.vaciarDetalleInscripcion();
-        
+                
+
                 //Insertando nuevo Detalle de Inscripcion
                 int count = jTableDetalleInscripcion.getRowCount();
                 // System.out.println("idClient" + ciCliente + " Fecha: " + fecha + " Monto: " + montoTotal + " Couunt: " + count);
@@ -419,18 +419,17 @@ public class Pinscripcion extends javax.swing.JFrame {
                     Ndisciplina disciplina = (Ndisciplina) jTableDetalleInscripcion.getValueAt(i, 1);
                     String fechaInicio = jTableDetalleInscripcion.getValueAt(i, 2).toString().trim();
                     String fechaFin = jTableDetalleInscripcion.getValueAt(i, 3).toString().trim();
-                    float subMonto = Float.parseFloat(jTableDetalleInscripcion.getValueAt(i, 4).toString().trim());                    
+                    float subMonto = Float.parseFloat(jTableDetalleInscripcion.getValueAt(i, 4).toString().trim());
                     nInscripcion.addDetalleInscripcion(disciplina.getId(), fechaInicio, fechaFin, subMonto);
                 }
                 nInscripcion.setDetalleInscripcionR();
-                nInscripcion.vaciarDetalleInscripcion();
-                System.out.println("Modificado");
                 
-                limpiar();
-                this.getInscripciones();
-            } else {
-                System.out.println("No se puede modicar");
+                System.out.println("Modificado");
+
             }
+
+            limpiar();
+            this.getInscripciones();
         } catch (Exception ex) {
             Logger.getLogger(Pinscripcion.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -451,55 +450,55 @@ public class Pinscripcion extends javax.swing.JFrame {
                     nInscripcion.setDetalleInscripcionE();
                     //elimininamos la disciplina
                     nInscripcion.setInscripcionE();
+                    
                     System.out.println("Eliminado");
-                    limpiar();
-                    nInscripcion.vaciarDetalleInscripcion();
-                    this.getInscripciones();
                 } catch (Exception ex) {
                     Logger.getLogger(Pcliente.class.getName()).log(Level.SEVERE, null, ex);
                 }
-                System.out.println("Lo eliminimaste");
+                System.out.println("Eliminado");
             }
-            
+            limpiar();
+            this.getInscripciones();
+
         } else {
-            System.out.println("No se puede eliminar");
+            this.nInscripcion.vaciarDetalleInscripcion();
         }
     }//GEN-LAST:event_btnEliminarActionPerformed
 
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Pinscripcion.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Pinscripcion.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Pinscripcion.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Pinscripcion.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new Pinscripcion().setVisible(true);
-            }
-        });
-    }
+//    public static void main(String args[]) {
+//        /* Set the Nimbus look and feel */
+//        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+//        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+//         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+//         */
+//        try {
+//            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+//                if ("Nimbus".equals(info.getName())) {
+//                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+//                    break;
+//                }
+//            }
+//        } catch (ClassNotFoundException ex) {
+//            java.util.logging.Logger.getLogger(Pinscripcion.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (InstantiationException ex) {
+//            java.util.logging.Logger.getLogger(Pinscripcion.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (IllegalAccessException ex) {
+//            java.util.logging.Logger.getLogger(Pinscripcion.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+//            java.util.logging.Logger.getLogger(Pinscripcion.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        }
+//        //</editor-fold>
+//
+//        /* Create and display the form */
+//        java.awt.EventQueue.invokeLater(new Runnable() {
+//            public void run() {
+//                new Pinscripcion().setVisible(true);
+//            }
+//        });
+//    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnEliminar;
@@ -550,7 +549,6 @@ public class Pinscripcion extends javax.swing.JFrame {
         jtextId.setText("");
         jlbMontoTotal.setText("Monto total 0.0 BS");
         jtextMontoTotal.setText("");
-        System.out.println("Limpiar el formulario");
     }
 
     private void addATablaInscripcion() {
@@ -560,7 +558,7 @@ public class Pinscripcion extends javax.swing.JFrame {
             id = jTableDisciplina.getValueAt(i, 0).toString();
             nombre = jTableDisciplina.getValueAt(i, 1).toString();
             Ndisciplina disciplina = new Ndisciplina(Integer.parseInt(id), nombre);
-            
+
             DefaultTableModel model = (DefaultTableModel) jTableDetalleInscripcion.getModel();
             model.addRow(new Object[]{id, disciplina, "2020-05-27", "", ""});
         }
